@@ -10,12 +10,12 @@
 using namespace std;
 vector<int> solution(vector<string> id_list, vector<string> report, int k) {
 
-	vector<int> answer(id_list.size(),0);
+	vector<int> answer(id_list.size(), 0);
 
 	unordered_map<string, int> count;
 	unordered_map<string, unordered_set<string>> list;
-	for(int i = 0; i<id_list.size(); ++i)
-		count[id_list[i]] = (0);
+	for (int i = 0; i < id_list.size(); ++i) // muzi frodo neo 0 1 2
+		count[id_list[i]] = i;
 
 
 	stringstream ss;
@@ -26,40 +26,22 @@ vector<int> solution(vector<string> id_list, vector<string> report, int k) {
 		ss.clear();
 		ss.str(info);
 		ss >> first >> second;
-		auto ret = list[first].insert(second);
-		if(ret.second)
-			count[second]++;
+		list[second].insert(first);
 		str.clear();
 	}
 
-	unordered_set<string> black_list;
-	for (const auto [id, cnt] : count)
-	{
-		if (cnt >= k) black_list.insert(id);
-	}
-
-	unordered_map<string, int> mail;
-	for (const auto& [id, o_ids] : list) // muzi frodo neo
+	for (const auto it : list) // frodo {muzi, neo} muzi {frodo}
 	{
 		int cnt = 0;
-		for (const auto& o_id : o_ids) // frodo neo
+		if (it.second.size() >= k)
 		{
-			for (const auto& b_id : black_list)
-			{
-				if (o_id == b_id)
-				{
-					cnt++;
-					break;
-				}
+			for (auto set_it : it.second) {
+				answer[count[set_it]]++;
 			}
 		}
-		mail.insert({ id,cnt });
+
 	}
-	int index = 0;
-	for (auto [id, cnt] : mail)
-	{
-		answer[index++] = cnt;
-	}
+
 
 	return answer;
 }
