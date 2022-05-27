@@ -1,5 +1,5 @@
 project "1_1"
-	kind "StaticLib"
+	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "On"
@@ -7,10 +7,6 @@ project "1_1"
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
-	pchheader "stdafx.h"
-	pchsource "src/stdafx.cpp"
-
-	
 	files
 	{
 		"src/**.h",
@@ -31,9 +27,9 @@ project "1_1"
 		systemversion "latest"
 
 	filter "configurations:Debug"
-		defines "1_1_DEBUG"
+		defines "1_1DEBUG"
 		symbols "On"
 
 	filter "configurations:Release"
-		defines "1_1_RELEASE"
+		defines "1_1RELEASE"
 		optimize "On"

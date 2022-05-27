@@ -4,3 +4,5 @@
 *.vcxproj
 *.user
 vendor/
+bin/
+bin-int/
