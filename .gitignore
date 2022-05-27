@@ -1,0 +1,6 @@
+*.sln
+.vs/
+*.filters
+*.vcxproj
+*.user
+vendor/
